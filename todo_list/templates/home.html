@@ -21,14 +21,14 @@
         {% if stuff.completed %}
             <tr class="table-light">
                 <td class="striker">{{ stuff.item }} </td>
-                <td><center>{{ stuff.completed }}</center></td>
-                <td><center>Delete</center></td>
+                <td><center><a href="{% url 'uncross' stuff.id %}">Uncross</a></center></td>
+                <td><center><a href="{% url 'delete' stuff.id %}">Delete</a></center></td>
             </tr>
         {% else %}
             <tr class="table-success">
                 <td>{{ stuff.item }} </td>
-                <td><center>{{ stuff.completed }}</center></td>
-                <td><center>Delete</center></td>
+                <td><center><a href="{% url 'cross_off' stuff.id %}">Cross off</a></center></td>
+                <td><center><a href="{% url 'delete' stuff.id %}">Delete</a></center></td>
             </tr>
         {% endif %}
         {% endfor %}
