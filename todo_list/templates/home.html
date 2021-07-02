@@ -2,19 +2,31 @@
 
 
 
+
 {% block content %}
+
+    {% if messages %}
+        {%for message in messages %}
+            <div class="alert alert-dark alert-dismissable" role="alert">
+                {% comment %} <button type="button" class="btn-close btn-close-black" aria-label="Close" data-dismiss="alert"></button> {% endcomment %}
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+
     {% if items %}
     <table class="table table-bordered">
         {% for stuff in items%}
         {% if stuff.completed %}
-            <tr class="table-success">
-                <td>{{ stuff.item }} </td>
+            <tr class="table-light">
+                <td class="striker">{{ stuff.item }} </td>
                 <td><center>{{ stuff.completed }}</center></td>
                 <td><center>Delete</center></td>
             </tr>
         {% else %}
-            <tr class="table-light">
-                <td class="striker">{{ stuff.item }} </td>
+            <tr class="table-success">
+                <td>{{ stuff.item }} </td>
                 <td><center>{{ stuff.completed }}</center></td>
                 <td><center>Delete</center></td>
             </tr>
