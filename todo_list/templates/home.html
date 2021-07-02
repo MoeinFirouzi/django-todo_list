@@ -1,8 +1,30 @@
 {% extends 'base.html' %}
 
+
+
 {% block content %}
- <h1>Hello World</h1>
+    {% if items %}
+    <table class="table table-bordered">
+        {% for stuff in items%}
+        {% if stuff.completed %}
+            <tr class="table-success">
+                <td>{{ stuff.item }} </td>
+                <td><center>{{ stuff.completed }}</center></td>
+                <td><center>Delete</center></td>
+            </tr>
+        {% else %}
+            <tr class="table-light">
+                <td class="striker">{{ stuff.item }} </td>
+                <td><center>{{ stuff.completed }}</center></td>
+                <td><center>Delete</center></td>
+            </tr>
+        {% endif %}
+        {% endfor %}
+    </table>
+    {% endif %}
 {% endblock %}
+
+
 
 {% block title %}
 To Do list
