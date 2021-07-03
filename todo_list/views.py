@@ -1,3 +1,4 @@
+from django import forms
 from django.shortcuts import redirect, render
 from .models import List
 from .forms import ListForm
@@ -42,12 +43,19 @@ def edit(request,item_id):
     """
     if request.method == "POST":
         edited_item = List.objects.get(pk=item_id)
-        edited_item.item = request.POST.get("item")
-        edited_item.save()
-        messages.success(request,f"Item has been changed to \"{str(edited_item)}\"")
-        return redirect('home')
+        """
+        note:
+        A model form instance attached to a model object will 
+        contain an instance attribute that gives its methods 
+        access to that specific model instance.
+        https://docs.djangoproject.com/en/3.2/topics/forms/modelforms/#overriding-the-clean-method
+        """
+        form = ListForm(request.POST, instance=edited_item)
+        if form.is_valid():
+            form.save()
+            messages.success(request,f"Item has been changed to \"{str(edited_item)}\"")
+            return redirect('home')
     else: 
         item = List.objects.get(pk=item_id)
-        print(item_id)
         context = {"item": item}
         return render(request, 'edit.html', context)
