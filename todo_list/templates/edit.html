@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}
+To Do list | edit
+{% endblock %}
+
+{% block content %}
+    <form class="d-flex" method="POST" action="{% url 'edit' item.id %}">
+        {% csrf_token %}
+        <input class="form-control me-2" type="search" value="{{ item.item }}" aria-label="Search" name="item">
+        <button class="btn btn-primary" type="submit" >Edit</button>
+    </form>
+{% endblock %}

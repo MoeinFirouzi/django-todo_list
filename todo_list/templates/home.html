@@ -19,14 +19,14 @@
     <table class="table table-bordered">
         {% for stuff in items%}
         {% if stuff.completed %}
-            <tr class="table-light">
-                <td class="striker">{{ stuff.item }} </td>
+            <tr class="table-light" style="">
+                <td class="striker">{{ stuff.item }}</td>
                 <td><center><a href="{% url 'uncross' stuff.id %}">Uncross</a></center></td>
                 <td><center><a href="{% url 'delete' stuff.id %}">Delete</a></center></td>
             </tr>
         {% else %}
             <tr class="table-success">
-                <td>{{ stuff.item }} </td>
+                <td><a href="{% url 'edit' stuff.id%}">{{ stuff.item }}</a></td>
                 <td><center><a href="{% url 'cross_off' stuff.id %}">Cross off</a></center></td>
                 <td><center><a href="{% url 'delete' stuff.id %}">Delete</a></center></td>
             </tr>

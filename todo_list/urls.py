@@ -5,5 +5,6 @@ urlpatterns = [
     path('about/', views.about, name="about"),
     path('delete/<item_id>', views.delete, name="delete"),
     path('uncross/<item_id>', views.uncross, name="uncross"),
-    path('crossoff/<item_id>', views.cross_off, name="cross_off")
+    path('crossoff/<item_id>', views.cross_off, name="cross_off"),
+    path('edit/<item_id>', views.edit, name="edit"),
 ]

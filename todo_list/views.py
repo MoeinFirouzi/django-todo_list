@@ -3,8 +3,8 @@ from .models import List
 from .forms import ListForm
 from django.contrib import messages
 from django.http import HttpResponseRedirect
-def home(request):
 
+def home(request):
     if request.method == "POST":
         form = ListForm(request.POST)
         if form.is_valid():
@@ -35,3 +35,19 @@ def cross_off(request,item_id):
     item.completed = True
     item.save()
     return redirect('home')    
+
+def edit(request,item_id):
+    """
+    from home by GET method and from edit page by POST method
+    """
+    if request.method == "POST":
+        edited_item = List.objects.get(pk=item_id)
+        edited_item.item = request.POST.get("item")
+        edited_item.save()
+        messages.success(request,f"Item has been changed to \"{str(edited_item)}\"")
+        return redirect('home')
+    else: 
+        item = List.objects.get(pk=item_id)
+        print(item_id)
+        context = {"item": item}
+        return render(request, 'edit.html', context)
